@@ -1,0 +1,33 @@
+{
+    "editor.fontSize": 20,
+    "debug.console.fontSize": 18,
+    "terminal.integrated.fontSize": 18,
+    "editor.fontWeight": "normal",
+    "workbench.editor.autoLockGroups": {
+        "default": true,
+        "jupyter-notebook": true
+    },
+    "launch": {
+
+
+        "configurations": [],
+        "compounds": []
+    },
+    "scm.inputFontSize": 18,
+    "terminal.integrated.automationProfile.linux": {
+    
+    },
+    "terminal.integrated.fontWeight": "normal",
+    "pythonPreview.code.fontSize": "20",
+    "pythonPreview.heapObject.fontSize": 16,
+    "pythonPreview.codeFooterDocs.fontSize": 16,
+    "pythonPreview.langDisplay.fontSize": "16",
+    "pythonPreview.legend.fontSize": 16,
+    "pythonPreview.printOutputDocs.fontSize": 16,
+    "pythonPreview.pyStdout.fontSize": 16,
+    "pythonPreview.retVal.fontSize": 16,
+    "pythonPreview.stackAndHeapHeader.fontSize": 16,
+    "pythonPreview.stackFrame.fontSize": 16,
+    "pythonPreview.stackFrameHeader.fontSize": 16,
+    "pythonPreview.typeLabel.fontSize": 16
+}
