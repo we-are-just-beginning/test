@@ -18,8 +18,8 @@ def btnData(path):
         df.insert(loc=0, column='OLDICCID', value=df['ICCID']) #插入OLDICCID列
         df2 = df['打印项'].str.split(',', expand=True)  # 按逗号拆分
         df2.rename(columns={0: '打印数据1', 1: '打印数据2', 2: '打印数据3', 3: '打印数据4'}, inplace=True) #打印项重命名
-        df2.drop(columns=4, inplace=True)  # 删除原来的打印项
-        df.drop(columns=['打印项'], inplace=True)  # 删除原来的打印项
+        # df2.drop(columns=4, inplace=True)  # 删除原来的打印项
+        df.drop(columns=['打印项',4], inplace=True)  # 删除原来的打印项
         data = pd.concat([df, df2], axis=1)  # 横向连接
         outfile = os.path.splitext(file)[0] + '_修复.mca'
 
