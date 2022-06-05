@@ -29,5 +29,10 @@
     "pythonPreview.stackAndHeapHeader.fontSize": 16,
     "pythonPreview.stackFrame.fontSize": 16,
     "pythonPreview.stackFrameHeader.fontSize": 16,
-    "pythonPreview.typeLabel.fontSize": 16
+    "pythonPreview.typeLabel.fontSize": 16,
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }
