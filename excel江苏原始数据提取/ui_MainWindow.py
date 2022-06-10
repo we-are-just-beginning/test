@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\PyStage\UID修复数据\MainWindow.ui'
+# Form implementation generated from reading ui file 'd:\PyStage\excel江苏\MainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -14,11 +14,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(599, 554)
+        MainWindow.resize(584, 558)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.groupBox.setGeometry(QtCore.QRect(60, 0, 451, 501))
+        self.groupBox.setGeometry(QtCore.QRect(70, 10, 451, 501))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(14)
@@ -35,6 +35,12 @@ class Ui_MainWindow(object):
         font.setPointSize(14)
         self.btnData.setFont(font)
         self.btnData.setObjectName("btnData")
+        self.btnTxt = QtWidgets.QPushButton(self.splitter)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(14)
+        self.btnTxt.setFont(font)
+        self.btnTxt.setObjectName("btnTxt")
         self.btnHandle = QtWidgets.QPushButton(self.splitter)
         font = QtGui.QFont()
         font.setFamily("Arial")
@@ -50,7 +56,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.splitter, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 599, 23))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 584, 23))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -64,7 +70,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.groupBox.setTitle(_translate("MainWindow", "UID修复数据制作"))
-        self.btnData.setText(_translate("MainWindow", "加载数据"))
+        self.groupBox.setTitle(_translate("MainWindow", "UID日志处理"))
+        self.btnData.setText(_translate("MainWindow", "加载文件"))
+        self.btnTxt.setText(_translate("MainWindow", "加载参考文件"))
         self.btnHandle.setText(_translate("MainWindow", "处理"))
         self.btnExit.setText(_translate("MainWindow", "退出"))

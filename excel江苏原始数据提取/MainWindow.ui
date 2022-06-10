@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>599</width>
-    <height>554</height>
+    <width>584</width>
+    <height>558</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>0</y>
+      <x>70</x>
+      <y>10</y>
       <width>451</width>
       <height>501</height>
      </rect>
@@ -30,7 +30,7 @@
      </font>
     </property>
     <property name="title">
-     <string>UID修复数据制作</string>
+     <string>UID日志处理</string>
     </property>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
@@ -46,7 +46,18 @@
          </font>
         </property>
         <property name="text">
-         <string>加载数据</string>
+         <string>加载文件</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btnTxt">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>加载参考文件</string>
         </property>
        </widget>
        <widget class="QPushButton" name="btnHandle">
@@ -81,7 +92,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>599</width>
+     <width>584</width>
      <height>23</height>
     </rect>
    </property>
