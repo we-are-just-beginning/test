@@ -83,6 +83,7 @@ class QmyMainWindow(QMainWindow):
             worksheet2["D15"].value = df2[df2['城市']==region].iloc[0,14]
             worksheet2["D19"].value = df2[df2['城市']==region].iloc[0,9]
             worksheet2["A19"].value = region
+            worksheet2["A19"].value = po
             worksheet2["D13"].value = pd.to_datetime(df2[df2['城市']==region].iloc[0,20])
             worksheet2["G13"].value = pd.to_datetime(df2[df2['城市']==region].iloc[0,20]) + dt.timedelta(3)
             worksheet2["D11"].value = df2[df2['城市']==region]['数量'].sum()
@@ -100,8 +101,6 @@ class QmyMainWindow(QMainWindow):
 
         workbook1.save()
         workbook1.close()
-        workbook2.save()
-        workbook2.close()
         app.quit()
         
         msg_box = QMessageBox(QMessageBox.Information, '处理结束', '已完成')

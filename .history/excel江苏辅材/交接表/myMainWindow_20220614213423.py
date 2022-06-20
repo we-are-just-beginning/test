@@ -83,6 +83,7 @@ class QmyMainWindow(QMainWindow):
             worksheet2["D15"].value = df2[df2['城市']==region].iloc[0,14]
             worksheet2["D19"].value = df2[df2['城市']==region].iloc[0,9]
             worksheet2["A19"].value = region
+            worksheet2["A19"].value = po
             worksheet2["D13"].value = pd.to_datetime(df2[df2['城市']==region].iloc[0,20])
             worksheet2["G13"].value = pd.to_datetime(df2[df2['城市']==region].iloc[0,20]) + dt.timedelta(3)
             worksheet2["D11"].value = df2[df2['城市']==region]['数量'].sum()
@@ -90,18 +91,13 @@ class QmyMainWindow(QMainWindow):
             worksheet4 = worksheet3.copy(after=worksheet3, name=region)
             worksheet4["A4"].options(transpose=True).value = df1[df1['城市'] == region]['城市'].values
             worksheet4["B4"].options(transpose=True).value = df1[df1['城市'] == region]['生产批号'].values
-            worksheet4["C4"].options(transpose=True).value = df1[df1['城市'] == region]['当前箱号'].values
-            worksheet4["D4"].options(transpose=True).value = df1[df1['城市'] == region]['当前盒号'].values
-            worksheet4["E4"].options(transpose=True).value = df1[df1['城市'] == region]['号段'].values
-            worksheet4["F4"].options(transpose=True).value = df1[df1['城市'] == region]['数量'].values
-            worksheet4["G4"].options(transpose=True).value = df1[df1['城市'] == region]['号段首'].values
-            worksheet4["H4"].options(transpose=True).value = df1[df1['城市'] == region]['号段尾'].values
-            worksheet4["I4"].options(transpose=True).value = df1[df1['城市'] == region]['文件名'].values
+            
+            
+            
+            
 
         workbook1.save()
         workbook1.close()
-        workbook2.save()
-        workbook2.close()
         app.quit()
         
         msg_box = QMessageBox(QMessageBox.Information, '处理结束', '已完成')

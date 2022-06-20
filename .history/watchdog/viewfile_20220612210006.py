@@ -1,7 +1,13 @@
 import os
 import time
+import csv
 from watchdog.observers import Observer
-from watchdog.events import PatternMatchingEventHandler
+from watchdog.events import LoggingEventHandler,PatternMatchingEventHandler
+
+
+
+
+
 
 
 f = open('C:\\output\\test.log', 'rb')

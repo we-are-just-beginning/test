@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\PyStage\excel江苏辅材\交接表\MainWindow.ui'
+# Form implementation generated from reading ui file 'd:\pydata\补卡处理\MainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -14,11 +14,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(644, 691)
+        MainWindow.resize(947, 644)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.groupBox.setGeometry(QtCore.QRect(110, 70, 411, 521))
+        self.groupBox.setGeometry(QtCore.QRect(250, 40, 451, 501))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(14)
@@ -41,12 +41,6 @@ class Ui_MainWindow(object):
         font.setPointSize(14)
         self.btnTxt.setFont(font)
         self.btnTxt.setObjectName("btnTxt")
-        self.btnTxt_2 = QtWidgets.QPushButton(self.splitter)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(14)
-        self.btnTxt_2.setFont(font)
-        self.btnTxt_2.setObjectName("btnTxt_2")
         self.btnHandle = QtWidgets.QPushButton(self.splitter)
         font = QtGui.QFont()
         font.setFamily("Arial")
@@ -62,7 +56,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.splitter, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 644, 23))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 947, 23))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -77,8 +71,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.groupBox.setTitle(_translate("MainWindow", "UID日志处理"))
-        self.btnData.setText(_translate("MainWindow", "加载标签数据"))
-        self.btnTxt.setText(_translate("MainWindow", "加载交接表"))
-        self.btnTxt_2.setText(_translate("MainWindow", "加载清单"))
+        self.btnData.setText(_translate("MainWindow", "加载数据"))
+        self.btnTxt.setText(_translate("MainWindow", "加载补卡文件"))
         self.btnHandle.setText(_translate("MainWindow", "处理"))
         self.btnExit.setText(_translate("MainWindow", "退出"))

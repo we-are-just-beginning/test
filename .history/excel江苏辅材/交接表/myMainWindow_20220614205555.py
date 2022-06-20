@@ -67,10 +67,9 @@ class QmyMainWindow(QMainWindow):
         app = xw.App(visible=False, add_book=False)
         app.display_alerts = False
         app.screen_updating = False
-        workbook1 = app.books.open(self.__file_name2)
-        worksheet1 = workbook1.sheets[0]
-        workbook2 = app.books.open(self.__file_name3)
-        worksheet3 = workbook2.sheets[0]        
+        workbook = app.books.open(self.__file_name2)
+        worksheet1 = workbook.sheets[0]
+        
        
         for region in reversed(regions):
             worksheet2 = worksheet1.copy(after=worksheet1, name=region)
@@ -83,25 +82,15 @@ class QmyMainWindow(QMainWindow):
             worksheet2["D15"].value = df2[df2['城市']==region].iloc[0,14]
             worksheet2["D19"].value = df2[df2['城市']==region].iloc[0,9]
             worksheet2["A19"].value = region
+            worksheet2["A19"].value = po
             worksheet2["D13"].value = pd.to_datetime(df2[df2['城市']==region].iloc[0,20])
             worksheet2["G13"].value = pd.to_datetime(df2[df2['城市']==region].iloc[0,20]) + dt.timedelta(3)
             worksheet2["D11"].value = df2[df2['城市']==region]['数量'].sum()
             worksheet2["C19"].value = df2[df2['城市']==region]['数量'].sum()
-            worksheet4 = worksheet3.copy(after=worksheet3, name=region)
-            worksheet4["A4"].options(transpose=True).value = df1[df1['城市'] == region]['城市'].values
-            worksheet4["B4"].options(transpose=True).value = df1[df1['城市'] == region]['生产批号'].values
-            worksheet4["C4"].options(transpose=True).value = df1[df1['城市'] == region]['当前箱号'].values
-            worksheet4["D4"].options(transpose=True).value = df1[df1['城市'] == region]['当前盒号'].values
-            worksheet4["E4"].options(transpose=True).value = df1[df1['城市'] == region]['号段'].values
-            worksheet4["F4"].options(transpose=True).value = df1[df1['城市'] == region]['数量'].values
-            worksheet4["G4"].options(transpose=True).value = df1[df1['城市'] == region]['号段首'].values
-            worksheet4["H4"].options(transpose=True).value = df1[df1['城市'] == region]['号段尾'].values
-            worksheet4["I4"].options(transpose=True).value = df1[df1['城市'] == region]['文件名'].values
+            
 
-        workbook1.save()
-        workbook1.close()
-        workbook2.save()
-        workbook2.close()
+        workbook.save()
+        workbook.close()
         app.quit()
         
         msg_box = QMessageBox(QMessageBox.Information, '处理结束', '已完成')

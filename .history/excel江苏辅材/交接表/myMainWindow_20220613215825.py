@@ -3,7 +3,7 @@ import pandas as pd
 import xlwings as xw
 import datetime as dt
 from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QFileDialog, QMessageBox)
+    QApplication, QMainWindow, QFileDialog, QMessageBox,QInputDialog)
 from PyQt5.QtCore import pyqtSlot, QDir
 from ui_MainWindow import Ui_MainWindow
 
@@ -16,7 +16,6 @@ class QmyMainWindow(QMainWindow):
         self.ui.setupUi(self)  # 构造UI界面
         self.__file_name1 = None
         self.__file_name2 = None
-        self.__file_name3 = None
 
 # ================自定义槽函数============================
 
@@ -43,20 +42,6 @@ class QmyMainWindow(QMainWindow):
 
 # ================自定义槽函数============================
 
-
-    @pyqtSlot()  # “加载参考文件 ”
-    def on_btnTxt_2_clicked(self):  # 为界面上的btnExcel按钮设置
-        curPath = QDir.currentPath()  # 获取系统当前目录
-        dlgTitle = "加载清单"  # 对话框标题
-        filt = "所有文件(*.*);;excel文件(*.xls*)"  # 文件过滤器
-        filename, filtused = QFileDialog.getOpenFileName(
-            self, dlgTitle, curPath, filt)
-        self.__file_name3 = filename
-
-
-# ================自定义槽函数============================
-
-
     @pyqtSlot()  # “数据处理 ”
     def on_btnHandle_clicked(self):  # 为界面上的btnHandle按钮设置
         label_dict = pd.read_excel(self.__file_name1,sheet_name=[0,1],header=0)  #读取标签数据成字典，盒签/箱签
@@ -67,11 +52,14 @@ class QmyMainWindow(QMainWindow):
         app = xw.App(visible=False, add_book=False)
         app.display_alerts = False
         app.screen_updating = False
-        workbook1 = app.books.open(self.__file_name2)
-        worksheet1 = workbook1.sheets[0]
-        workbook2 = app.books.open(self.__file_name3)
-        worksheet3 = workbook2.sheets[0]        
-       
+        workbook = app.books.open(self.__file_name2)
+        worksheet1 = workbook.sheets[0]
+        
+        num, ok = QInputDialog.getText(self, 'Integer input dialog', '输入数字')
+        if ok and num:
+            self.GetIntlineEdit.setText(str(num))
+
+        
         for region in reversed(regions):
             worksheet2 = worksheet1.copy(after=worksheet1, name=region)
             worksheet2["G2"].value = df2[df2['城市'] == region].iloc[0,17]
@@ -87,21 +75,10 @@ class QmyMainWindow(QMainWindow):
             worksheet2["G13"].value = pd.to_datetime(df2[df2['城市']==region].iloc[0,20]) + dt.timedelta(3)
             worksheet2["D11"].value = df2[df2['城市']==region]['数量'].sum()
             worksheet2["C19"].value = df2[df2['城市']==region]['数量'].sum()
-            worksheet4 = worksheet3.copy(after=worksheet3, name=region)
-            worksheet4["A4"].options(transpose=True).value = df1[df1['城市'] == region]['城市'].values
-            worksheet4["B4"].options(transpose=True).value = df1[df1['城市'] == region]['生产批号'].values
-            worksheet4["C4"].options(transpose=True).value = df1[df1['城市'] == region]['当前箱号'].values
-            worksheet4["D4"].options(transpose=True).value = df1[df1['城市'] == region]['当前盒号'].values
-            worksheet4["E4"].options(transpose=True).value = df1[df1['城市'] == region]['号段'].values
-            worksheet4["F4"].options(transpose=True).value = df1[df1['城市'] == region]['数量'].values
-            worksheet4["G4"].options(transpose=True).value = df1[df1['城市'] == region]['号段首'].values
-            worksheet4["H4"].options(transpose=True).value = df1[df1['城市'] == region]['号段尾'].values
-            worksheet4["I4"].options(transpose=True).value = df1[df1['城市'] == region]['文件名'].values
+            
 
-        workbook1.save()
-        workbook1.close()
-        workbook2.save()
-        workbook2.close()
+        workbook.save()
+        workbook.close()
         app.quit()
         
         msg_box = QMessageBox(QMessageBox.Information, '处理结束', '已完成')

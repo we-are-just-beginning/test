@@ -1,7 +1,9 @@
 import sys
 import pandas as pd
+import xlwings as xw
+import datetime as dt
 from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QFileDialog, QMessageBox)
+    QApplication, QMainWindow, QFileDialog, QMessageBox,QInputDialog)
 from PyQt5.QtCore import pyqtSlot, QDir
 from ui_MainWindow import Ui_MainWindow
 
@@ -20,7 +22,7 @@ class QmyMainWindow(QMainWindow):
     @pyqtSlot()  # “选择已有文件 ”
     def on_btnData_clicked(self):  # 为界面上的btnData按钮设置
         curPath = QDir.currentPath()  # 获取系统当前目录
-        dlgTitle = "加载文件"  # 对话框标题
+        dlgTitle = "加载标签数据"  # 对话框标题
         filt = "所有文件(*.*);;excel文件(*.xls*)"  # 文件过滤器
         filename, filtused = QFileDialog.getOpenFileName(
             self, dlgTitle, curPath, filt)
@@ -31,7 +33,7 @@ class QmyMainWindow(QMainWindow):
     @pyqtSlot()  # “加载参考文件 ”
     def on_btnTxt_clicked(self):  # 为界面上的btnExcel按钮设置
         curPath = QDir.currentPath()  # 获取系统当前目录
-        dlgTitle = "加载参考文件"  # 对话框标题
+        dlgTitle = "加载交接表"  # 对话框标题
         filt = "所有文件(*.*);;excel文件(*.xls*)"  # 文件过滤器
         filename, filtused = QFileDialog.getOpenFileName(
             self, dlgTitle, curPath, filt)
@@ -42,18 +44,39 @@ class QmyMainWindow(QMainWindow):
 
     @pyqtSlot()  # “数据处理 ”
     def on_btnHandle_clicked(self):  # 为界面上的btnHandle按钮设置
-        df1 = pd.read_excel(self.__file_name1,sheet_name=0,header=0,skiprows=5,usecols=[0],dtype=object)
-        df2 = pd.read_excel(self.__file_name2,sheet_name=0,header=0,dtype=object)
-        data_all=[]
-        for name in df1['文件明细\nFile Name']:
-            data = df2[df2['文件名'] == name]
-            data_all.append(data)
-        df_all = pd.concat(data_all)
-        
-           
-        outpath = self.__file_name1.split('.')[0] + '_提取.xls'
-        df_all.to_excel(outpath, index=False)
+        label_dict = pd.read_excel(self.__file_name1,sheet_name=[0,1],header=0)  #读取标签数据成字典，盒签/箱签
+        df1 = label_dict[0]
+        df2 = label_dict[1]
+        regions = df2['城市'].unique().tolist()
              
+        app = xw.App(visible=False, add_book=False)
+        app.display_alerts = False
+        app.screen_updating = False
+        workbook = app.books.open(self.__file_name2)
+        worksheet1 = workbook.sheets[0]
+
+        
+        for region in reversed(regions):
+            worksheet2 = worksheet1.copy(after=worksheet1, name=region)
+            worksheet2["G2"].value = df2[df2['城市'] == region].iloc[0,17]
+            worksheet2["G4"].value = df2[df2['城市']==region].iloc[0,15]
+            worksheet2["G5"].value = df2[df2['城市']==region].iloc[0,16]
+            worksheet2["D7"].value = df2[df2['城市']==region].iloc[0,18]            
+            worksheet2["D9"].value = df2[df2['城市']==region].iloc[0,13]           
+            worksheet2["D12"].value = df2[df2['城市']==region].iloc[0,9]
+            worksheet2["D15"].value = df2[df2['城市']==region].iloc[0,14]
+            worksheet2["D19"].value = df2[df2['城市']==region].iloc[0,9]
+            worksheet2["A19"].value = region
+            worksheet2["D13"].value = pd.to_datetime(df2[df2['城市']==region].iloc[0,20])
+            worksheet2["G13"].value = pd.to_datetime(df2[df2['城市']==region].iloc[0,20]) + dt.timedelta(3)
+            worksheet2["D11"].value = df2[df2['城市']==region]['数量'].sum()
+            worksheet2["C19"].value = df2[df2['城市']==region]['数量'].sum()
+            
+
+        workbook.save()
+        workbook.close()
+        app.quit()
+        
         msg_box = QMessageBox(QMessageBox.Information, '处理结束', '已完成')
         msg_box.exec_()
 

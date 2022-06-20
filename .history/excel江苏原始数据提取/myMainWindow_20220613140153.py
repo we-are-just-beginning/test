@@ -44,15 +44,9 @@ class QmyMainWindow(QMainWindow):
     def on_btnHandle_clicked(self):  # 为界面上的btnHandle按钮设置
         df1 = pd.read_excel(self.__file_name1,sheet_name=0,header=0,skiprows=5,usecols=[0],dtype=object)
         df2 = pd.read_excel(self.__file_name2,sheet_name=0,header=0,dtype=object)
-        data_all=[]
-        for name in df1['文件明细\nFile Name']:
-            data = df2[df2['文件名'] == name]
-            data_all.append(data)
-        df_all = pd.concat(data_all)
-        
-           
-        outpath = self.__file_name1.split('.')[0] + '_提取.xls'
-        df_all.to_excel(outpath, index=False)
+        data = df2[df2['文件名'].isin(df1['文件明细'])]             
+        outpath = self.__file_name1.split('.')[0] + '_提取.csv'
+        data.to_csv(outpath, index=False, encoding='gbk')
              
         msg_box = QMessageBox(QMessageBox.Information, '处理结束', '已完成')
         msg_box.exec_()

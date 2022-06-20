@@ -1,7 +1,13 @@
 import os
 import time
+import csv
 from watchdog.observers import Observer
-from watchdog.events import PatternMatchingEventHandler
+from watchdog.events import LoggingEventHandler,PatternMatchingEventHandler
+
+
+
+
+
 
 
 f = open('C:\\output\\test.log', 'rb')
@@ -29,8 +35,8 @@ class MyHandler(PatternMatchingEventHandler):
         print(data)
         timenow = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
         with open('D:\\ICLOG\\all.log','a',newline='') as f:
-            for line in data:
-                f.write(timenow + '/' + line)
+            writer = csv.writer(f,delimiter='/')
+            writer.writerow(timenow + '/' + data)
             
             
 if __name__ == '__main__':

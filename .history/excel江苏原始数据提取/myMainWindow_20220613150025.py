@@ -52,7 +52,7 @@ class QmyMainWindow(QMainWindow):
         
            
         outpath = self.__file_name1.split('.')[0] + '_提取.xls'
-        df_all.to_excel(outpath, index=False)
+        df_all.to_csv(outpath, index=False)
              
         msg_box = QMessageBox(QMessageBox.Information, '处理结束', '已完成')
         msg_box.exec_()
