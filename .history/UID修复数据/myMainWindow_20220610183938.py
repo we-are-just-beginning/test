@@ -43,7 +43,7 @@ class QmyMainWindow(QMainWindow):
             df.dropna()  # 删除全部空行
             df = df.reset_index(drop=True)  # 重置索引
             df.insert(loc=0, column='OLDICCID',
-                      value=df['ICCID_K'])  # 插入OLDICCID列
+                      value=df['ICCID'])  # 插入OLDICCID列
             df2 = df['打印项'].str.split(',', expand=True)  # 按逗号拆分
             df2.rename(columns={0: '打印数据1', 1: '打印数据2',
                        2: '打印数据3', 3: '打印数据4'}, inplace=True)  # 打印项重命名
